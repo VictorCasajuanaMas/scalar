@@ -1,0 +1,4 @@
+*.exe
+*.map
+.hbmk
+.vscode

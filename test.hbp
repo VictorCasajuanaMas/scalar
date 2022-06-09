@@ -1,0 +1,11 @@
+-d
+-inc
+-warn=max
+
+test.prg
+
+.\debug\debugger.prg
+.\scalar\*.prg
+.\hbunit\*.prg
+-i.\scalar\inc
+
