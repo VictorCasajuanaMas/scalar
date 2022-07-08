@@ -10,6 +10,7 @@ CREATE CLASS Character INHERIT HBScalar FUNCTION HBCharacter
         METHOD Upper()
         METHOD Lower()
         METHOD Capitulate()
+        METHOD Capitalize()
         METHOD Alltrim()
         METHOD Del(cString)
         METHOD ISEmpty()
@@ -36,6 +37,7 @@ CREATE CLASS Character INHERIT HBScalar FUNCTION HBCharacter
         METHOD LeftDeleteUntil( cCharacter )
         METHOD Zeros( nLength, nDecimals )
         METHOD SpacesRight( nSpaces )
+        METHOD Reverse( cString )
         
 
 END CLASS
@@ -106,6 +108,7 @@ Devuelve:
     String
 */
 METHOD Upper() CLASS Character
+
 Return Upper( Self )
 
 /* METHOD: Lower()
@@ -421,3 +424,48 @@ METHOD SpacesRight( nLenght ) CLASS Character
     Endif
 
 Return ( cReturn )
+
+/* METHOD: Reverse()
+    Devuelve el inverso de la cadena
+
+    Parámetros:
+        cString - Cadena a invertir
+Devuelve:
+    Character
+*/
+METHOD Reverse()
+
+    Local cCharacter := ''
+    Local nCount := 0
+ 
+    For nCount := Self:Len() to 1 step -1
+ 
+       cCharacter += Self:Substr( nCount, 1 )
+ 
+    Next
+ 
+Return ( cCharacter ) 
+
+/* METHOD: Capitalize()
+    Devuelve el valor del dato con la primera letra de cada palabra en mayúsculas
+    y el resto en minúsculas
+
+Devuelve:
+    String
+*/
+METHOD Capitalize() CLASS Character
+
+    Local cStringCapitalize := ''
+    Local aWords := hb_ATokens( Self)
+    Local nCount := 0
+
+    If !Empty( Self )
+
+      For nCount := 1 To Len(aWords)
+
+         cStringCapitalize += aWords[nCount]:Capitulate() + ' '
+      Next
+
+    Endif
+
+Return ( cStringCapitalize:Alltrim() )

@@ -4,6 +4,7 @@
 
 test.prg
 
+hbct.hbc
 .\debug\debugger.prg
 .\scalar\*.prg
 .\hbunit\*.prg

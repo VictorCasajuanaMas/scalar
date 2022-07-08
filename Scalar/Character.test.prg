@@ -10,6 +10,7 @@ CLASS Test_Character FROM TestCase
         METHOD Test_Lower()
         METHOD Test_Alltrim()
         METHOD Test_Capitulate()
+        METHOD Test_Capitalize()
         METHOD Test_Del()
         METHOD Test_DelLast()
         METHOD Test_IsEmpty()
@@ -30,6 +31,7 @@ CLASS Test_Character FROM TestCase
         METHOD Test_LeftDeleteUntil()
         METHOD Test_Zeros()
         METHOD Test_Spaces()
+        METHOD Test_Reverse()
 
 END CLASS
 
@@ -110,12 +112,18 @@ Return ( Nil )
 METHOD Test_Upper() CLASS Test_Character
 
     ::Assert():Equals( 'ABCDE', 'abcde':upper(), 'test Character:upper()')
+    ::Assert():Equals( 'ÁÉÍÓÚ', 'áéíóú':upper(), 'test Character:upper()')
+    ::Assert():Equals( 'ÀÈÌÒÙ', 'àèìòù':upper(), 'test Character:upper()')
+    ::Assert():Equals( 'ÄËÏÖÜ', 'äëïöü':upper(), 'test Character:upper()')
     
 Return ( Nil )
 
 METHOD Test_Lower() CLASS Test_Character
 
     ::Assert():Equals( 'abcde', 'ABCDE':lower(), 'test Character:lower()' )
+    ::Assert():Equals( 'áéíóú', 'ÁÉÍÓÚ':lower(), 'test Character:lower()' )
+    ::Assert():Equals( 'àèìòù', 'ÀÈÌÒÙ':lower(), 'test Character:lower()' )
+    ::Assert():Equals( 'äëïöü', 'ÄËÏÖÜ':lower(), 'test Character:lower()' )
 
 Return ( Nil )
 
@@ -128,6 +136,17 @@ Return ( Nil )
 METHOD Test_Capitulate() CLASS Test_Character
 
     ::Assert():Equals( 'Hola', 'hOLA':Capitulate(), 'test Character:Capitulate()' )
+    ::Assert():Equals( 'Hola mundo', 'hOLA muNdo':Capitulate(), 'test Character:Capitulate()' )
+    ::Assert():Equals( 'Un rincón del mundo', 'Un rincón del mundo':Capitulate(), 'test Character:Capitulate()' )
+
+Return ( Nil )
+
+METHOD Test_Capitalize() CLASS Test_Character
+
+    ::Assert():Equals( 'Hola', 'hOLA':Capitalize(), 'test Character:Capitalize()' )
+    ::Assert():Equals( 'Hola Mundo', 'hOLA muNdo':Capitalize(), 'test Character:Capitalize()' )
+    ::Assert():Equals( 'Un Rincón Del Mundo', 'un Rincón dEL mundo':Capitalize(), 'test Character:Capitalize()' )
+
 
 Return ( Nil )
 
@@ -242,3 +261,12 @@ METHOD Test_Spaces() CLASS Test_Character
     ::Assert():Equals( 'HOLA      ', 'HOLA ':SpacesRight( 10 ) )
 
 Return  ( Nil )
+
+METHOD Test_Reverse() CLASS Test_Character
+
+    ::Assert():Equals( 'aloH', 'Hola':Reverse(), "Test CharacterReverse()" )
+    ::Assert():Equals( 'odnuM aloH', 'Hola Mundo':Reverse(), "Test CharacterReverse()" )
+    ::Assert():Equals( '54321', '12345':Reverse(), "Test CharacterReverse()" )
+    ::Assert():Equals( '', '':Reverse(), "Test CharacterReverse()" )
+
+Return ( Nil )

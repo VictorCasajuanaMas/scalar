@@ -88,6 +88,13 @@ METHOD Str( cSeparator ) CLASS Array
 
             cString += xValue:Str() + Iif( xValue:__enumindex < Self:Len(), cSeparator, '' )
 
+            If HB_ISARRAY( xValue ) .Or.;
+                HB_ISHASH( xValue )
+ 
+                cString += hb_eol()
+ 
+             Endif
+
         Endif
         
     next
@@ -458,12 +465,10 @@ METHOD Transpose( lSquare )
 
     Local aNewArray := Array ( 0 )
     Local xItem     := Nil
-    Local xResult   := Nil
 
     for each xItem in Self
 
-        xResult := Eval ( bBlock, xItem )
-        aAdD( aNewArray, xResult )
+        aAdD( aNewArray, Eval ( bBlock, xItem ) )
         
     next
  

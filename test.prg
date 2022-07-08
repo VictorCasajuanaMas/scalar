@@ -5,11 +5,16 @@ Function Main()
     Local oSuite := TestSuite():New()
     Local oRunner := TestTestRunner():New()
 
+    
     SET CENTURY ON
     SET EXACT ON
     SET DATE TO BRITISH
+    
     REQUEST HB_LANG_ES
+    REQUEST HB_CODEPAGE_ESWIN
+    REQUEST HB_CODEPAGE_UTF8EX
     HB_LangSelect("ES")
+    HB_CDPSELECT ("ESWIN")
 
     oSuite:setCategories( {'core'} ) 
 
