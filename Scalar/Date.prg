@@ -18,8 +18,8 @@ CREATE CLASS Date INHERIT HBScalar FUNCTION HBDate
 		
         METHOD FirstDayOfYear()
         METHOD LastDayOfYear()
-		METHOD FirstDayOfMonth()
-		METHOD LastDayOfMonth()
+		METHOD FirstDayOfMonth
+		METHOD LastDayOfMonth
 		METHOD FirstDayOfWeek()
 		METHOD LastDayOfWeek()
 		
@@ -41,6 +41,8 @@ CREATE CLASS Date INHERIT HBScalar FUNCTION HBDate
         METHOD IsEmpty()
         METHOD NotEmpty()
 		METHOD StrFormat( cFormat )
+        METHOD Dow()
+
 ENDCLASS
 
 // Group EXPORTED METHODS
@@ -476,3 +478,27 @@ METHOD StrFOrmat( cFormat ) CLASS Date
     cDate:=strTran(cDate,"AA",cVar)
 
 Return ( cDate )
+
+
+/* METHOD: Dow(  )
+    Devuelve el nº del día de la semana teniendo en cuenta que 1-lunes 7-domingo
+    
+    Parámetros:
+        
+
+Devuelve:
+    numérico
+*/
+METHOD Dow(  ) CLASS Date
+
+    Local nDiaSemana AS NUMERIC := 0
+
+    nDiaSemana := Dow( Self ) -1
+
+    If nDiaSemana == 0
+
+        nDiaSemana := 7
+
+    Endif
+
+Return ( nDiaSemana )

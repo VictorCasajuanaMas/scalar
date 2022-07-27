@@ -38,6 +38,7 @@ CREATE CLASS Character INHERIT HBScalar FUNCTION HBCharacter
         METHOD Zeros( nLength, nDecimals )
         METHOD SpacesRight( nSpaces )
         METHOD Reverse( cString )
+        METHOD ToDate( cFormat, xReturn )
         
 
 END CLASS
@@ -469,3 +470,39 @@ METHOD Capitalize() CLASS Character
     Endif
 
 Return ( cStringCapitalize:Alltrim() )
+
+/* METHOD: ToDate( cFormat, xReturn )
+    Devuelve la fecha dependiendo del string que contiene self según la siguiente sintaxis:
+
+        h -- Fecha de actual ( t - today )
+        m -- Fecha de mañana ( w - tomorrow )
+        a -- Fecha de ayer   ( y - yesterday )
+		
+		+d -- Dentro de d días
+		-d -- Hace d días
+		>  -- Último día del año
+		<  -- Primer días del año
+		
+		d, dd - Día d del mes y año actual
+		dmm, ddmm - Día d y mes mm del año actual
+		dmmaa, ddmmaa - Día d y mes mm del año aa
+		dmmaaaa, ddmmaaaa - Día d y mes mm del año aaaa
+		d/m, d/mm, dd/m, dd/mm - Día d y mes m del año actual
+		d/m/a - Día d y mes mm del año aa
+		sem, semana - Fecha del próximo dia de la semana.
+    
+    Parámetros:
+
+        xReturn - Cadena a devolver si no se logra la conversión, Date() por defecto
+	    cFormat - Formato de entrada AMD MDA AMD
+
+Devuelve:
+    Date
+*/
+METHOD ToDate( cFormat, xReturn, dDate ) CLASS Character
+
+    Local oStrToDate AS OBJECT := StrToDate():New()
+
+    oStrToDate:SetDate( dDate )
+
+Return ( oStrToDate:Convert( Self, cFormat, xReturn ) )
